@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>..::Editar Cuenta::..</title>
+    <link rel="stylesheet" href="style.-gestionCuentas.css">
+</head>
+<body>
+    <h2>Editar Cuenta #{{ cuenta.id }}</h2>
+
+    <form method="POST" action="{% url 'actualizar_cuenta' cuenta.id %}">
+        {% csrf_token %}
+
+        <label>Tipo Cuenta (Número):</label>
+        <input type="number" name="txtTipoCuenta" value="{{ cuenta.tipocuenta }}" required>
+        <br><br>
+
+        <label>Descripción:</label>
+        <input type="text" name="txtDescripcion" value="{{ cuenta.descripcion }}" required>
+        <br><br>
+
+        <label>Saldo:</label>
+        <input type="number" step="0.01" name="txtSaldo" value="{{ cuenta.saldo|stringformat:'.2f' }}" required>
+        <br><br>
+
+        <button type="submit">Actualizar Cuenta</button>
+        <a href="{% url 'listar_cuentas' %}">Cancelar</a>
+    </form>
+</body>
+</html>
